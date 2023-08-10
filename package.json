@@ -2,7 +2,7 @@
   "name": "@digifi/async-ratelimiter",
   "description": "Rate limit made simple, easy, async.",
   "homepage": "https://nicedoc.io/microlinkhq/async-ratelimiter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "src/index.js",
   "author": {
     "email": "hello@microlink.io",

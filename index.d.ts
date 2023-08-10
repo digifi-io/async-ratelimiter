@@ -1,4 +1,4 @@
-declare module 'async-ratelimiter' {
+declare module '@digifi/async-ratelimiter' {
   import { RedisClient } from 'redis'
 
   namespace RateLimiter {
