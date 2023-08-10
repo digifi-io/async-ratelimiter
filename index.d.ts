@@ -1,9 +1,9 @@
 declare module 'async-ratelimiter' {
-  import { Redis } from 'ioredis'
+  import { RedisClient } from 'redis'
 
   namespace RateLimiter {
     interface ConstructorOptions {
-      db: Redis
+      db: RedisClient
       max?: number
       duration?: number
       namespace?: string

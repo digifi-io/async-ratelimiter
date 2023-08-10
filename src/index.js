@@ -35,10 +35,10 @@ module.exports = class Limiter {
       ['pexpire', key, duration]
     ]
 
-    const res = await this.db.multi(operations).exec()
-    const count = toNumber(res[1][1])
-    const oldest = toNumber(res[3][1])
-    const oldestInRange = toNumber(res[4][1])
+    const res = await this.execRedis(operations);
+    const count = toNumber(res[1])
+    const oldest = toNumber(res[3][0])
+    const oldestInRange = toNumber(res[4][0])
     const resetMicro = (Number.isNaN(oldestInRange) ? oldest : oldestInRange) + duration * 1000
 
     return {
@@ -46,5 +46,17 @@ module.exports = class Limiter {
       reset: Math.floor(resetMicro / 1000000),
       total: max
     }
+  }
+
+  async execRedis(operations) {
+    return new Promise((resolve, reject) => {
+      this.db.multi(operations).exec((err, res) => {
+        if (err) {
+          reject(err);
+        } 
+
+        resolve(res);
+      });
+    });
   }
 }
